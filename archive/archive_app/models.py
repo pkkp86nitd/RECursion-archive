@@ -14,7 +14,7 @@ class Question(models.Model):
     questionLink = models.URLField(max_length=500)
     solutionLink = models.URLField(max_length=500)
     summary = models.TextField()
-    addedBy = models.ForeignKey(User, on_delete=models.CASCADE)
+    addedBy = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True)
     addedOn = models.DateTimeField(auto_now=False, auto_now_add=True)
     lastModified = models.DateTimeField(auto_now=True, auto_now_add=False)
 

@@ -59,7 +59,11 @@ def list_questions(request):
 def create_question(request):
     form = QuestionForm(request.POST or None)
     if form.is_valid():
-        form.save()
+        new_form=form.save(commit=False)
+           
+        new_form.addedBy=request.user
+        print(request.user)
+        new_form.save()
         return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form})
@@ -74,7 +78,11 @@ def update_question(request, id):
         form = QuestionForm(request.POST or None, instance=question)
 
         if form.is_valid():
-            form.save()
+            new_form=form.save(commit=False)
+           
+            new_form.addedBy=request.user
+            print(request.user)
+            new_form.save()
             return redirect('list_questions')
 
     return render(request, 'questions-form.html', {'form': form, 'question': question})
